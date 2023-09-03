@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Dashboard</title>
+</head>
+
+<body class="bg-gray-100 flex flex-col h-screen">
+
+    <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center mb-4">
+            <!-- Button for redirecting to the index page -->
+            <a href="/admin/index" class="text-blue-500 hover:text-blue-700 font-bold">Back to Index</a>
+        </div>
+        <div class="mb-4">
+            <label for="filterState" class="block text-gray-700 font-bold mb-2">Filter by State:</label>
+            <select id="filterState" name="filterState"
+                class="border rounded w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300">
+                <!-- Populate this dropdown with unique states from your companies -->
+                <option value="all">All</option>
+                <% states.forEach(state => { %>
+                <option value="<%= state %>"><%= state %></option>
+                <% }); %>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="filterCity" class="block text-gray-700 font-bold mb-2">Filter by City:</label>
+            <select id="filterCity" name="filterCity"
+                class="border rounded w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300">
+                <!-- Populate this dropdown with unique cities based on the selected state -->
+                <option value="all">All</option>
+                <% cities.forEach(city => { %>
+                <option value="<%= city %>"><%= city %></option>
+                <% }); %>
+            </select>
+        </div>
+        <h2 class="text-2xl font-bold mb-4">Company Dashboard</h2>
+
+        <!-- Loop through registered companies and display them in cards -->
+        <% companies.forEach(company => { %>
+        <div class="company-card bg-white p-4 rounded shadow-md mb-4"
+            data-company-state="<%= company.state %>" data-company-city="<%= company.city %>">
+            <h3 class="text-xl font-semibold mb-2"><%= company.companyName %></h3>
+            <p><strong>Owner:</strong> <%= company.ownerName %></p>
+            <p><strong>GST No:</strong> <%= company.gstNo %></p>
+            <p><strong>Address:</strong> <%= company.address %></p>
+            <p><strong>State:</strong> <%= company.state %></p>
+            <p><strong>City:</strong> <%= company.city %></p>
+            <p><strong>Email:</strong> <%= company.email %></p>
+            <p><strong>Registration Date:</strong> <%= company.registrationDate.toDateString() %></p>
+        </div>
+        <% }); %>
+    </div>
+
+    <script>
+        const filterStateDropdown = document.getElementById('filterState');
+        const filterCityDropdown = document.getElementById('filterCity');
+        const companyCards = document.querySelectorAll('.company-card');
+
+        filterStateDropdown.addEventListener('change', filterCompanies);
+        filterCityDropdown.addEventListener('change', filterCompanies);
+
+        function filterCompanies() {
+            const selectedState = filterStateDropdown.value;
+            const selectedCity = filterCityDropdown.value;
+
+            companyCards.forEach(companyCard => {
+                const companyState = companyCard.getAttribute('data-company-state');
+                const companyCity = companyCard.getAttribute('data-company-city');
+
+                const stateMatch = selectedState === 'all' || selectedState === companyState;
+                const cityMatch = selectedCity === 'all' || selectedCity === companyCity;
+
+                if (stateMatch && cityMatch) {
+                    companyCard.style.display = 'block';
+                } else {
+                    companyCard.style.display = 'none';
+                }
+            });
+        }
+
+        filterCompanies(); // Initial filter when the page loads
+    </script>
+</body>
+
+</html>
