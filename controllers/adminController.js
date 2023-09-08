@@ -38,7 +38,7 @@ exports.postLogin = (req, res) => {
 
     if (username === 'admin' && password === 'admin@123456') {
         // Admin authentication successful
-        const token = jwt.sign({ userType: 'admin' }, jwtSecret); // Create a JWT token
+        const token = jwt.sign({ userType: 'Admin' }, jwtSecret); // Create a JWT token
         res.cookie('token', token); // Set the token as a cookie (you can also send it as a response)
         res.redirect('/admin/index');
     } else {
