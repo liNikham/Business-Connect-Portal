@@ -9,43 +9,33 @@
     <title>Dashboard</title>
 </head>
 
-<body class="bg-gray-100 flex flex-col h-screen">
+<body class="bg-cyan-600 flex flex-col h-screen">
 
-    <div class="container mx-auto p-4">
-        <div class="flex justify-between items-center mb-4">
-            <!-- Button for redirecting to the index page -->
-            <a href="/admin/index" class="text-blue-500 hover:text-blue-700 font-bold">Back to Index</a>
-        </div>
+    <div class="container mx-auto p-4 max-w-7xl">
+
+       <div class="flex justify-center items-center space-x-3">
         <div class="mb-4">
-            <label for="filterState" class="block text-gray-700 font-bold mb-2">Filter by State:</label>
-            <select id="filterState" name="filterState"
-                class="border rounded w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300">
-                <!-- Populate this dropdown with unique states from your companies -->
-                <option value="all">All</option>
-                <% states.forEach(state => { %>
-                <option value="<%= state %>"><%= state %></option>
-                <% }); %>
-            </select>
+            <label for="searchState" class="block text-[#220E24]  font-bold mb-2">Search by State:</label>
+            <input type="text" id="searchState" placeholder="Enter state..."
+                class="border rounded w-full py-2 px-3 focus:outline-none">
+            <div id="stateSuggestions" class="suggestions"></div>
         </div>
 
         <div class="mb-4">
-            <label for="filterCity" class="block text-gray-700 font-bold mb-2">Filter by City:</label>
-            <select id="filterCity" name="filterCity"
-                class="border rounded w-full py-2 px-3 focus:outline-none focus:ring focus:border-blue-300">
-                <!-- Populate this dropdown with unique cities based on the selected state -->
-                <option value="all">All</option>
-                <% cities.forEach(city => { %>
-                <option value="<%= city %>"><%= city %></option>
-                <% }); %>
-            </select>
+            <label for="searchCity" class="block text-[#220E24] font-bold mb-2">Search by City:</label>
+            <input type="text" id="searchCity" placeholder="Enter city..."
+                class="border rounded w-full py-2 px-3 focus:outline-none ">
+            <div id="citySuggestions" class="suggestions"></div>
         </div>
-        <h2 class="text-2xl font-bold mb-4">Company Dashboard</h2>
+       </div>
+
+        <h2 class="text-2xl font-bold mb-4">List of Companies</h2>
 
         <!-- Loop through registered companies and display them in cards -->
         <% companies.forEach(company => { %>
-        <div class="company-card bg-white p-4 rounded shadow-md mb-4"
+        <div class="company-card bg-white p-4 rounded-2xl mb-4 shadow-2xl"
             data-company-state="<%= company.state %>" data-company-city="<%= company.city %>">
-            <h3 class="text-xl font-semibold mb-2"><%= company.companyName %></h3>
+            <h3 class="text-xl font-bold mb-2"><%= company.companyName %></h3>
             <p><strong>Owner:</strong> <%= company.ownerName %></p>
             <p><strong>GST No:</strong> <%= company.gstNo %></p>
             <p><strong>Address:</strong> <%= company.address %></p>
@@ -58,23 +48,23 @@
     </div>
 
     <script>
-        const filterStateDropdown = document.getElementById('filterState');
-        const filterCityDropdown = document.getElementById('filterCity');
+        const searchState = document.getElementById('searchState');
+        const searchCity = document.getElementById('searchCity');
         const companyCards = document.querySelectorAll('.company-card');
 
-        filterStateDropdown.addEventListener('change', filterCompanies);
-        filterCityDropdown.addEventListener('change', filterCompanies);
+        searchState.addEventListener('input', filterCompanies);
+        searchCity.addEventListener('input', filterCompanies);
 
         function filterCompanies() {
-            const selectedState = filterStateDropdown.value;
-            const selectedCity = filterCityDropdown.value;
+            const queryState = searchState.value.toLowerCase();
+            const queryCity = searchCity.value.toLowerCase();
 
             companyCards.forEach(companyCard => {
-                const companyState = companyCard.getAttribute('data-company-state');
-                const companyCity = companyCard.getAttribute('data-company-city');
+                const companyState = companyCard.getAttribute('data-company-state').toLowerCase();
+                const companyCity = companyCard.getAttribute('data-company-city').toLowerCase();
 
-                const stateMatch = selectedState === 'all' || selectedState === companyState;
-                const cityMatch = selectedCity === 'all' || selectedCity === companyCity;
+                const stateMatch = queryState === '' || companyState.includes(queryState);
+                const cityMatch = queryCity === '' || companyCity.includes(queryCity);
 
                 if (stateMatch && cityMatch) {
                     companyCard.style.display = 'block';
@@ -83,8 +73,6 @@
                 }
             });
         }
-
-        filterCompanies(); // Initial filter when the page loads
     </script>
 </body>
 

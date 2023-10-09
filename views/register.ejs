@@ -7,46 +7,46 @@
     <link rel="stylesheet" href="/styles/style.css">
     <title>Register Company</title>
 </head>
-<body class="bg-gray-100 flex items-center justify-center my-3 h-screen">
+<body class="bg-cyan-600 flex items-center justify-center my-3 h-screen">
     <div class="bg-white p-8 rounded shadow-md ">
-        <h2 class="text-2xl mb-4">Register Company</h2>
+        <h2 class="text-2xl mb-4 font-bold font-serif">Register Company</h2>
         <form action="/admin/register" method="POST">
             <div class="flex justify-between space-x-4">
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="companyName">Company Name</label>
+                    <label class="block text-gray-700 font-bold mb-2 font-mono " for="companyName ">Company Name</label>
                     <input class="border rounded w-full py-2 px-3" type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="ownerName">Owner Name</label>
+                    <label class="block text-gray-700  font-mono font-bold mb-2" for="ownerName">Owner Name</label>
                     <input class="border rounded w-full py-2 px-3" type="text" id="ownerName" name="ownerName" placeholder="Enter owner name" required>
                 </div>
             </div>
            <div class="flex justify-between">
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="gstNo">GST No</label>
+                <label class="block text-gray-700 font-bold  font-mono mb-2" for="gstNo">GST No</label>
                 <input class="border rounded w-full py-2 px-3" type="text" id="gstNo" name="gstNo" placeholder="Enter GST No" required>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="email">Email</label>
+                <label class="block text-gray-700   font-mono font-bold mb-2" for="email">Email</label>
                 <input class="border rounded w-full py-2 px-3" type="email" id="email" name="email" placeholder="Enter email" required>
             </div>
            </div>
           <div class="flex justify-between">
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="state">State</label>
+                <label class="block  font-mono text-gray-700 font-bold mb-2" for="state">State</label>
                 <input class="border rounded w-full py-2 px-3" type="text" id="state" name="state" placeholder="Enter state" required>
             </div>
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="city">City</label>
+                <label class="block text-gray-700  font-mono font-bold mb-2" for="city">City</label>
                 <input class="border rounded w-full py-2 px-3" type="text" id="city" name="city" placeholder="Enter city" required>
             </div>
           </div>
            
             <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="address">Address</label>
+                <label class="block text-gray-700  font-mono font-bold mb-2" for="address">Address</label>
                 <input class="border rounded w-full py-2 px-3" type="text" id="address" name="address" placeholder="Enter address" required>
             </div>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Register</button>
+            <button class="bg-cyan-500  font-mono font-extrabold text-white px-4 py-2 rounded" type="submit">Register</button>
         </form>
     </div>
 </body>

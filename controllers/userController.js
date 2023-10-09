@@ -16,7 +16,7 @@ function generateRandomPassword() {
 exports.getLoginPage = (req, res) => {
     const userType = 'User'; // Assuming you've set userType in your middleware
     console.log("User Type:", userType);
-    res.render('login', { userType }); // Render the login page
+    res.render('login', { userType: 'User',errorMessage:null });
 };
 
 
@@ -42,7 +42,7 @@ exports.postLogin = async (req, res) => {
             res.render('userIndex');
         } else {
             // Authentication failed
-            res.send('Invalid username or password');
+            res.status(400).render('login.ejs', { userType: 'Admin',errorMessage: 'Invalid username or password' });
         }
     } catch (error) {
         console.error(error);
@@ -110,7 +110,7 @@ exports.postUpdateDetails = async (req, res) => {
 };
 
 exports.forgotPassword = (req, res) => {
-    console.log("helo")
+   
     res.render('forgotPassword'); // Render the forgot_password view
 };
 
@@ -151,7 +151,7 @@ exports.sendPasswordResetEmail = async (req, res) => {
             } else {
                 console.log('Email sent: ' + info.response);
                 // Redirect or render a success page
-                res.render('login',{userType:"user"})
+                res.render('login', { userType: 'User',errorMessage:null });
             }
         });
           

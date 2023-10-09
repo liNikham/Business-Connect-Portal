@@ -7,25 +7,53 @@
     <link rel="stylesheet" href="/styles/style.css">
     <title>Login</title>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body class="bg-red-300 flex  justify-center items-center h-screen ">
+    <section class="relative bg-center bg-no-repeat bg-[url('/images/login.jpg')]  bg-blend-multiply w-[90%] h-[80%] bg-cover rounded-2xl shadow-2xl shadow-red-600">
     
-    <div class="bg-white p-8 rounded shadow-md w-96">
-        <h2 class="text-2xl mb-4"><%= userType %> Login</h2>
-        <form action="/<%= userType %>/login" method="POST">
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="username">Username</label>
-                <input class="border rounded w-full py-2 px-3" type="text" id="username" name="username" placeholder="Enter username">
+        
+        <div class="absolute top-8 bg-red-500 bg-opacity-20 backdrop-blur-10 m-4 py-8 px-6 rounded-2xl shadow-md w-full max-w-lg flex flex-col ">
+            <div id="errorMessage" class=" flex font-bold items-center justify-center  <%= errorMessage ? '' : 'hidden' %>">
+               
+                    <span class="text-white-500"><%= errorMessage %></span>
+                
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
-                <input class="border rounded w-full py-2 px-3" type="password" id="password" name="password" placeholder="Enter password">
-            </div>
-            <div class="mb-4">
-                <a href="/user/forgot_password">Forgot Password?</a>
-            </div>
-            <button class="bg-blue-500 text-white px-4 py-2 rounded" type="submit">Login</button>
-        </form>
-    </div>
+           
+            <form action="/<%= userType %>/login" method="POST" class="flex flex-col">
+                <div class="mb-4">
+                    <label class="block text-black font-serif font-semibold text-lg  mb-2" for="username">Username</label>
+                    <input class="border rounded-xl <%= errorMessage ? 'border-red-400 placeholder-red-400 '  :'' %>  outline-none w-full py-2 px-3 focus:border-none " type="text" id="username" name="username" placeholder="Enter username">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-black text-lg font-bold mb-2" for="password">Password</label>
+                    <input
+                    class="border rounded-xl <%= errorMessage ? 'border-red-400 placeholder-red-400 ' : ' ' %>  outline-none  w-full py-2 px-3 focus:border-none "
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter password"
+                  >
+                </div>
+                <div class="mb-4 text-lg">
+                    <a href="/user/forgot_password" class="text-bold font-bold text-black">Forgot Password?</a>
+                </div>
+                <button class="bg-transparent tracking-wide text-white px-4 py-4 font-extrabold text-2xl rounded" type="submit "onclick="hideErrorMessage()">Login</button>
+            </form>
+        </div>
+        <div>
+    
+        </div>
+        
+            
+        </section>
+   
+    <script>
+        function hideErrorMessage() {
+            const errorMessageElement = document.getElementById('errorMessage');
+            errorMessageElement.style.display = 'none';
+        }
+      
+    </script>
+    
 </body>
 </html>
-    `
+    

@@ -42,13 +42,14 @@ exports.postLogin = (req, res) => {
         res.cookie('token', token); // Set the token as a cookie (you can also send it as a response)
         res.redirect('/admin/index');
     } else {
-        // Authentication failed
-        res.send('Invalid username or password');
+        
+        res.status(400).render('login.ejs', { userType: 'Admin',errorMessage: 'Invalid username or password' });
+
     }
 };
 
 exports.getLoginPage = (req, res) => {
-    res.render('login', { userType: 'admin' }); // Render the login page
+    res.render('login', { userType: 'Admin',errorMessage:null }); // Render the login page
 };
 exports.getRegisterPage = (req, res) => {
     res.render('register'); // Render the login page
