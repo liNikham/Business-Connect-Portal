@@ -36,7 +36,7 @@ exports.postLogin = (req, res) => {
     const { username, password } = req.body;
 
 
-    if (username === 'admin' && password === 'admin@123456') {
+    if (username === 'admin' && password === '123456') {
         // Admin authentication successful
         const token = jwt.sign({ userType: 'Admin' }, jwtSecret); // Create a JWT token
         res.cookie('token', token); // Set the token as a cookie (you can also send it as a response)
@@ -53,6 +53,9 @@ exports.getLoginPage = (req, res) => {
 };
 exports.getRegisterPage = (req, res) => {
     res.render('register'); // Render the login page
+};
+exports.getFaqPage = (req, res) => {
+    res.render('faq'); // Render the login page
 };
 // adminController.js
 exports.logout = (req, res) => {

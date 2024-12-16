@@ -15,7 +15,8 @@ app.get('/node_modules/flowbite/dist/flowbite.min.js', (req, res) => {
   res.sendFile(path.join(__dirname, 'node_modules/flowbite/dist/flowbite.min.js'));
 });
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+
 mongoose.connect(dbConnectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -36,6 +37,9 @@ app.get('/about', (req, res) => {
 });
 app.get('/contact', (req, res) => {
   res.render('contact');
+});
+app.get('/faq', (req, res) => {
+  res.render('faq');
 });
 // ... other configurations and middleware
 

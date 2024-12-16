@@ -9,6 +9,7 @@ router.post('/login', adminController.postLogin);
 
 // Admin dashboard route
 router.get('/index',adminController.checkAdminAuthorization,  adminController.getIndex);
+router.get('/faq',adminController.checkAdminAuthorization,adminController.getFaqPage);
 router.get('/register-company',adminController.checkAdminAuthorization, adminController.getRegisterPage);
 router.post('/register',adminController.registerCompany);
 router.get('/dashboard', adminController.checkAdminAuthorization, adminController.getDashboard);
